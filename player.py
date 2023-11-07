@@ -13,3 +13,7 @@ class Player(Entity):
             self.rect.x -= 10
         if keys[pg.K_d]:
             self.rect.x += 10
+        if keys[pg.K_s]:
+            self.rect.y += 10
+        if keys[pg.K_w]:
+            self.rect.y -= 10
