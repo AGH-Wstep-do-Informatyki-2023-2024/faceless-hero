@@ -2,7 +2,9 @@
 
 # Faceless Hero
 
+## O czym jest gra
 
+Facelles hero to gra platformowa 2D osadzona w erze edo, czyli zmierzchu japońskich samurajów. Gracz wciela się w rolę samuraja, którego wioska zostaje zaatakowana przez wrogiego bohaterowi sioguna. W wyniku walk rodzina protagonisty zostaje zamordowana, a ten w poszukiwaniu zemsty wyrusza odnaleźć osoby odpowiedzialne za masakrę.
 
 ## Wstęp
 
@@ -52,9 +54,7 @@ Patryk Harasik - jako programmista oraz muzyk.
 
 Bogdan Khmelnitskiy - jako game designer.
 
-## O czym jest gra
 
-Facelles hero to gra platformowa 2D osadzona w erze edo, czyli zmierzchu japońskich samurajów. Gracz wciela się w rolę samuraja, którego wioska zostaje zaatakowana przez wrogiego bohaterowi sioguna. W wyniku walk rodzina protagonisty zostaje zamordowana, a ten w poszukiwaniu zemsty wyrusza odnaleźć osoby odpowiedzialne za masakrę.
 
 
 ## Inspiracja
