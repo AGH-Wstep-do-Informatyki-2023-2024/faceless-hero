@@ -44,5 +44,11 @@ Do wykonania projektu wykorzystaliśmy:
 
 Ten projekt jest objęty licencją MIT. Szczegółowe informacje można znaleźć w pliku [LICENSE.md](LICENSE.md).
 
+## Autorzy
+
+Patryk Harasik - jako programmista oraz muzyk
+Łukasz  Włodarczyk - jako programmista
+Bogdan Khmelnitskiy - jako game designer
+
 ## Inspiracja
 
