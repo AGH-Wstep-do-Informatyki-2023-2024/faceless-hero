@@ -36,11 +36,12 @@ W oknie konsoli nalezży przejść do folderu z kodem gry oraz wpisać:
 python main.py
 ```
 
-## Biblioteki
+## Narzędzia
 
 Do wykonania projektu wykorzystaliśmy:
 
 * [Pygame](https://www.pygame.org/)
+* [Libresprite](https://libresprite.github.io/#!/)
 
 ## Licencja
 
