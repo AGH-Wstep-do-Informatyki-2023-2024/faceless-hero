@@ -13,7 +13,6 @@ class FacelessHero(metaclass=Singleton):
         self.screen = pg.display.set_mode((height, width))
         self.clock = pg.time.Clock()
         self.scene = Scene(self)
-
         self.is_running = True
 
     @staticmethod
@@ -45,6 +44,7 @@ class FacelessHero(metaclass=Singleton):
         self.scene.draw()
 
     def exit(self):
+        self.scene.exit()
         pg.quit()
         try:
             sys.exit()
