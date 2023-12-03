@@ -47,7 +47,9 @@ Ten projekt jest objęty licencją MIT. Szczegółowe informacje można znaleź�
 ## Autorzy
 
 Patryk Harasik - jako programmista oraz muzyk
+
 Łukasz  Włodarczyk - jako programmista
+
 Bogdan Khmelnitskiy - jako game designer
 
 ## Inspiracja
