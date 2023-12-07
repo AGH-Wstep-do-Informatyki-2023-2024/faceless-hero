@@ -8,17 +8,17 @@ class Scene:
         self.game = game
         self.db = Database(AUTOSAVE_FILE)
         self.autosave = Interval(AUTOSAVE_INTERVAL, self.save)
-        self.entities = self.db.load()
+        self.pool = self.db.load()
 
     def update(self):
-        self.entities.update()
+        self.pool.update()
 
     def draw(self):
         self.game.screen.fill("crimson")
-        self.entities.draw(self.game.screen)
+        self.pool.draw(self.game.screen)
 
     def save(self):
-        self.db.save(self.entities)
+        self.db.save(self.pool)
 
     def exit(self):
         self.autosave.stop()

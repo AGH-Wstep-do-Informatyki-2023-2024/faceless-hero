@@ -2,24 +2,16 @@ import json
 import pygame as pg
 from entity import Entity
 from player import Player
-from globals import *
-
-
-def player(group, pos):
-    return Player([group], PLAYER_WIDTH, PLAYER_HEIGHT, pos)
-
-
-def normal(group, pos):
-    return Entity([group], ENTITY_WIDTH, ENTITY_HEIGHT, pos)
+from pool import Pool
 
 
 class Database:
     def __init__(self, file):
         self.file = file
 
-    def save(self, group):
+    def save(self, pool):
         data = []
-        for sprite in group:
+        for sprite in pool:
             entity = {"x": sprite.rect.x, "y": sprite.rect.y}
             match sprite:
                 case Player():
@@ -31,20 +23,20 @@ class Database:
             json.dump(data, file)
 
     def load(self):
-        group = pg.sprite.Group()
+        pool = Pool()
         try:
             with open(self.file) as file:
                 data = json.load(file)
                 for entity in data:
-                    pos = (entity["x"], entity["y"])
+                    x, y = entity["x"], entity["y"]
                     match entity["type"]:
                         case "player":
-                            player(group, pos)
+                            pool.add_player(x, y)
                         case "normal":
-                            normal(group, pos)
+                            pool.add_entity(x, y)
         except FileNotFoundError:
-            player(group, (100, 100))
-            normal(group, (10, 10))
-            normal(group, (40, 10))
-            self.save(group)
-        return group
+            pool.add_player(100, 100)
+            pool.add_entity(10, 10)
+            pool.add_entity(40, 10)
+            self.save(pool)
+        return pool
