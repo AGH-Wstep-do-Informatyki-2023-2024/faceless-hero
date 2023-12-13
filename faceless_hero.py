@@ -6,13 +6,13 @@ from globals import *
 
 
 class FacelessHero(metaclass=Singleton):
-    def __init__(self, height, width):
+    def __init__(self, height: int, width: int):
         self.pygame_init()
         self.height = height
         self.width = width
         self.screen = pg.display.set_mode((height, width))
         self.clock = pg.time.Clock()
-        self.scene = Scene(self)
+        self.scene = Scene(self.screen)
         self.is_running = True
 
     @staticmethod
