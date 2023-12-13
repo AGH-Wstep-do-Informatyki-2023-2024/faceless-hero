@@ -1,7 +1,7 @@
 from interval import Interval
 from group import Group
 from globals import *
-
+import pygame as pg
 
 class Scene:
     def __init__(self, game):
@@ -13,12 +13,14 @@ class Scene:
         self.entities.update()
 
     def draw_bg(self):
-        self.scroll = 0
+        self.scroll = 5
         self.bg_images = []
-        self.bg_width = self.bg_images[0].get_width()
-        for i in range(0, 4):
-            self.bg_image = self.game.pygame.image.load(f"assets/background parallax_{i}.png").convert_alpha()
+        
+        for i in range(3, -1, -1):
+            self.bg_image = pg.image.load(f"assets/background/background paralax_{i}.png").convert_alpha()
             self.bg_images.append(self.bg_image)
+        
+        self.bg_width = self.bg_images[0].get_width()
 
         for x in range(5):
             for i in self.bg_images:
