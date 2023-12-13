@@ -41,7 +41,7 @@ class FacelessHero(metaclass=Singleton):
         self.clock.tick(FPS)
 
     def draw(self):
-        self.scene.draw()
+        self.scene.draw_bg()
 
     def exit(self):
         self.scene.exit()
