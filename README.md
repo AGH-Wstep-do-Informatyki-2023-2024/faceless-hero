@@ -55,8 +55,5 @@ Patryk Harasik - jako programmista oraz muzyk.
 
 Bogdan Khmelnitskiy - jako game designer.
 
-
-
-
-## Inspiracja
-
+## Muzyka
+- Japan - Yakov Golman, Free Music Archive, CC BY
