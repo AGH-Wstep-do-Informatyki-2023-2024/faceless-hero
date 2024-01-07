@@ -3,6 +3,7 @@ from group import Group
 from timer import Timer
 from globals import *
 
+AUTOSAVE_INTERVAL = 60 * 1000
 
 class Scene:
     def __init__(self, screen: pg.Surface):
