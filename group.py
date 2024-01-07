@@ -31,6 +31,7 @@ class Group(pg.sprite.Group):
         self.window = data["window"]
 
     def save(self):
+        print("saving...")
         with open(DB_FILE, "w") as f:
             json.dump(
                 {
