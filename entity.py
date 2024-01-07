@@ -1,14 +1,26 @@
 import pygame as pg
 
+ENTITY_SIZE = (15, 15)
+ENTITY_COLOR = (36, 48, 86)
 
-# Implements basic movement physics
+
 class Entity(pg.sprite.Sprite):
-    def __init__(self, groups, w, h, pos=(0, 0)):
-        super(Entity, self).__init__(groups)
+    def __init__(
+        self,
+        group: pg.sprite.Group,
+        params: dict,
+        size: tuple[int, int] = ENTITY_SIZE,
+        color: tuple[int, int, int] = ENTITY_COLOR,
+    ):
+        super(Entity, self).__init__([group])
 
-        self.image = pg.Surface((w, h))
-        self.rect = self.image.get_rect(topleft=pos)
+        self.image = pg.Surface(size)
+        self.image.fill(color)
+        self.rect = self.image.get_rect(topleft=(params["x"], params["y"]))
 
         self.vx = 0
         self.vy = 0
         self.mass = 0
+
+    def params(self):
+        return {"x": self.rect.x, "y": self.rect.y}

@@ -1,19 +1,10 @@
 import pygame as pg
 from entity import Entity
 
+PLAYER_SIZE = (30, 30)
+PLAYER_COLOR = (18, 24, 43)
+
 
 class Player(Entity):
-    def __init__(self, groups, w, h, pos=(0, 0)):
-        super(Player, self).__init__(groups, w, h, pos)
-
-    def update(self):
-        keys = pg.key.get_pressed()
-
-        if keys[pg.K_a]:
-            self.rect.x -= 10
-        if keys[pg.K_d]:
-            self.rect.x += 10
-        if keys[pg.K_s]:
-            self.rect.y += 10
-        if keys[pg.K_w]:
-            self.rect.y -= 10
+    def __init__(self, group: pg.sprite.Group, params: dict):
+        super(Player, self).__init__(group, params, PLAYER_SIZE, PLAYER_COLOR)

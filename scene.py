@@ -1,17 +1,19 @@
-from interval import Interval
-from group import Group
-from globals import *
 import pygame as pg
-from player import Player
+from group import Group
+from timer import Timer
+from globals import *
+
 
 class Scene:
-    def __init__(self, game):
-        self.game = game
-        self.entities = Group(AUTOSAVE_FILE)
-        self.autosave = Interval(AUTOSAVE_INTERVAL, self.entities.save)
+    def __init__(self, screen: pg.Surface):
+        self.screen = screen
+        self.group = Group(screen)
+        self.autosave = Timer(AUTOSAVE_INTERVAL, True, self.group.save)
+        self.autosave.start()
 
     def update(self):
-        self.entities.update()
+        self.group.update()
+        self.autosave.update()
 
     def draw_bg(self):
         self.bg_images = []
@@ -27,10 +29,6 @@ class Scene:
             for i in self.bg_images:
                 self.game.screen.blit(i, ((x * self.bg_width), 0))
 
-    # def draw(self):
-    #     self.game.screen.fill("crimson")
-    #     self.entities.draw(self.game.screen)
-
     def exit(self):
         self.autosave.stop()
-        self.entities.save()
+        self.group.save()

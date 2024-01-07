@@ -6,22 +6,25 @@ from globals import *
 
 
 class FacelessHero(metaclass=Singleton):
-    def __init__(self, height, width):
+    def __init__(self, height: int, width: int):
         self.pygame_init()
         self.height = height
         self.width = width
         self.screen = pg.display.set_mode((height, width))
         self.clock = pg.time.Clock()
-        self.scene = Scene(self)
+        self.scene = Scene(self.screen)
         self.is_running = True
 
     @staticmethod
     def pygame_init():
         pg.init()
         pg.display.set_caption("Faceless Hero")
+        pg.mixer.init()
         # pg.font.Font() # TODO obsługa fontów
 
     def main(self, debug=False):
+        pg.mixer.music.load("assets/sounds/music/Yakov Golman - Japan.mp3")
+        pg.mixer.music.play(-1)
         while self.is_running:
             self.handle_event()
             self.update()
