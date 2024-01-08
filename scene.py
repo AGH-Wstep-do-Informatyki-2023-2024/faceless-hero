@@ -3,7 +3,7 @@ from group import Group
 from timer import Timer
 from globals import *
 
-AUTOSAVE_INTERVAL = 60 * 10
+AUTOSAVE_INTERVAL = 60 * 1000
 
 
 class Scene:
@@ -22,8 +22,8 @@ class Scene:
 
         for i in range(3, -1, -1):
             self.bg_image = pg.image.load(
-                f"assets/background/background paralax_{i}.png").convert_alpha()
-            self.bg_image = pg.transform.scale(self.bg_image, (640, 480))
+                f"assets/layers/parallax-demon-woods-{i}.png").convert_alpha()
+            self.bg_image = pg.transform.scale(self.bg_image, (1920, 1080))
             self.bg_images.append(self.bg_image)
 
         self.bg_width = self.bg_images[0].get_width()
