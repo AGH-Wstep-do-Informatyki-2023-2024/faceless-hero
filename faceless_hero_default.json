@@ -1,9 +1,7 @@
 {
-  "window": {
-    "x": 0
-  },
+  "offset": 0,
   "player": {
-    "x": 50
+    "x": 0
   },
   "entities": [
     {

@@ -21,12 +21,14 @@ class Scene:
         except FileNotFoundError:
             with open(DB_DEFAULT) as f:
                 data = json.load(f)
-        self.window = data["window"]
-        self.player = Entity(self.group, PLAYER_SIZE, PLAYER_COLOR, data["player"])
+        self.offset = data["offset"]
         self.entities = [
-            Entity(self.group, ENTITY_SIZE, ENTITY_COLOR, params)
+            Entity(self.group, ENTITY_SIZE, ENTITY_COLOR, params, self.offset)
             for params in data["entities"]
         ]
+        self.player = Entity(
+            self.group, PLAYER_SIZE, PLAYER_COLOR, data["player"], self.offset
+        )
 
     def load_bg(self):
         self.bg_images = [
@@ -43,26 +45,25 @@ class Scene:
         with open(DB_FILE, "w") as f:
             json.dump(
                 {
-                    "window": self.window,
-                    "player": self.player.params(),
-                    "entities": [entity.params() for entity in self.entities],
+                    "offset": self.offset,
+                    "player": self.player.params(self.offset),
+                    "entities": [
+                        entity.params(self.offset) for entity in self.entities
+                    ],
                 },
                 f,
             )
 
     def move(self, delta: int):
-        left_ratio = self.player.rect.x / WINDOW_SIZE[0]
-        right_ratio = (self.player.rect.x + self.player.rect.width) / WINDOW_SIZE[0]
+        left = self.player.rect.x
+        right = left + self.player.rect.width
         if (
-            (PLAYER_MOVE_BORDER < left_ratio and right_ratio < 1 - PLAYER_MOVE_BORDER)
+            (MOVE_BORDER < left and right < WINDOW_SIZE[0] - MOVE_BORDER)
             or (
-                right_ratio >= 1 - PLAYER_MOVE_BORDER
-                and (delta < 0 or self.window["x"] == MAP_SIZE[0] - WINDOW_SIZE[0])
+                right >= WINDOW_SIZE[0] - MOVE_BORDER
+                and (delta < 0 or self.offset == MAP_SIZE[0] - WINDOW_SIZE[0])
             )
-            or (
-                left_ratio <= PLAYER_MOVE_BORDER
-                and (delta > 0 or self.window["x"] == 0)
-            )
+            or (left <= MOVE_BORDER and (delta > 0 or self.offset == 0))
         ):
             self.player.rect.x = max(
                 0,
@@ -71,23 +72,28 @@ class Scene:
                 ),
             )
         else:
-            self.window["x"] = max(
-                0, min(MAP_SIZE[0] - WINDOW_SIZE[0], self.window["x"] + delta)
-            )
+            if self.offset + delta < 0:
+                delta = -self.offset
+            if self.offset + delta > MAP_SIZE[0] - WINDOW_SIZE[0]:
+                delta = MAP_SIZE[0] - WINDOW_SIZE[0] - self.offset
+            self.offset += delta
             for entity in self.entities:
                 entity.rect.x -= delta
 
     def update(self):
         keys = pg.key.get_pressed()
         if keys[pg.K_d]:
-            self.move(PLAYER_MOVE_DELTA)
+            self.move(MOVE_DELTA)
         elif keys[pg.K_a]:
-            self.move(-PLAYER_MOVE_DELTA)
+            self.move(-MOVE_DELTA)
 
     def draw(self):
         for i in range(5):
-            for bg_image in self.bg_images:
-                self.screen.blit(bg_image, (i * WINDOW_SIZE[0], 0))
+            for j, bg_image in enumerate(self.bg_images):
+                self.screen.blit(
+                    bg_image,
+                    (i * WINDOW_SIZE[0] - self.offset * (j + 1) * PARALLAX_SPEED, 0),
+                )
         self.group.draw(self.screen)
 
     def exit(self):
