@@ -1,18 +1,18 @@
-from pygame.time import get_ticks
-from typing import Callable
+import pygame as pg
+from typing import Callable, Optional
 
 
 class Timer:
     def __init__(
-        self, duration: int, repeated: bool = False, func: Callable | None = None
+        self, duration: int, func: Optional[Callable] = None, repeated: bool = False
     ):
         self.duration = duration
-        self.repeated = repeated
         self.func = func
+        self.repeated = repeated
         self.stop()
 
     def start(self):
-        self.start_time = get_ticks()
+        self.start_time = pg.time.get_ticks()
         self.is_running = True
 
     def stop(self):
@@ -20,7 +20,7 @@ class Timer:
         self.is_running = False
 
     def update(self):
-        if get_ticks() - self.start_time >= self.duration and self.is_running:
+        if pg.time.get_ticks() - self.start_time >= self.duration and self.is_running:
             if self.func and self.start_time != 0:
                 self.func()
             self.stop()

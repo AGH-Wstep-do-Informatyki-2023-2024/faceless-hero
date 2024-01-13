@@ -1,26 +1,21 @@
 import pygame as pg
-
-ENTITY_SIZE = (15, 15)
-ENTITY_COLOR = (36, 48, 86)
+from globals import *
 
 
 class Entity(pg.sprite.Sprite):
     def __init__(
         self,
         group: pg.sprite.Group,
-        params: dict,
-        size: tuple[int, int] = ENTITY_SIZE,
-        color: tuple[int, int, int] = ENTITY_COLOR,
+        size: tuple[int, int],
+        color: tuple[int, int, int],
+        params: dict[str, int],
     ):
-        super(Entity, self).__init__([group])
-
+        super().__init__(group)
         self.image = pg.Surface(size)
         self.image.fill(color)
-        self.rect = self.image.get_rect(topleft=(params["x"], params["y"]))
-
-        self.vx = 0
-        self.vy = 0
-        self.mass = 0
+        self.rect = self.image.get_rect(
+            bottomleft=(params["x"], MAP_SIZE[1] - MAP_GROUND_OFFSET)
+        )
 
     def params(self):
-        return {"x": self.rect.x, "y": self.rect.y}
+        return {"x": self.rect.x}

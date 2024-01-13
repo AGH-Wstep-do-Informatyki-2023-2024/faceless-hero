@@ -6,11 +6,9 @@ from globals import *
 
 
 class FacelessHero(metaclass=Singleton):
-    def __init__(self, height: int, width: int):
+    def __init__(self):
         self.pygame_init()
-        self.height = height
-        self.width = width
-        self.screen = pg.display.set_mode((height, width))
+        self.screen = pg.display.set_mode(WINDOW_SIZE)
         self.clock = pg.time.Clock()
         self.scene = Scene(self.screen)
         self.is_running = True
@@ -44,7 +42,7 @@ class FacelessHero(metaclass=Singleton):
         self.clock.tick(FPS)
 
     def draw(self):
-        self.scene.draw_bg()
+        self.scene.draw()
 
     def exit(self):
         self.scene.exit()
