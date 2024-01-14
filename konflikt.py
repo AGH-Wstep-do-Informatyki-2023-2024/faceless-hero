@@ -1,1 +1,1 @@
-Print("another text")
+Print("text")
